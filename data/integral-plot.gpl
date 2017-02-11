@@ -1,0 +1,33 @@
+set term pngcairo enhanced colour
+
+# Output type of graphic
+set term pngcairo
+set output "../img/integral.png"
+
+# Data which want to display
+set datafile separator "\t"
+input = "ikal.csv"
+
+set title "Response to a step RPM with Kp = 6.5x10^{-3} and different value of K_i"
+
+# x-axis
+set format x "%.0s"
+set xlabel "Time (s)"
+
+# y-axis
+set format y "%.0s"
+set ylabel "kRPM"
+
+set autoscale
+
+# size of x-y width
+set size 1.0, 1.0
+
+set key ins vert
+set key right center
+
+plot \
+input u 19:20 lt 1 lw 2 lc rgb "green" title "K_i = 1.0x10^{-7}" smooth bezier, \
+input u 37:38 lt 1 lw 2 lc rgb "blue" title "K_i = 3.0x10^{-7}" smooth bezier, \
+input u 49:50 lt 1 lw 2 lc rgb "red" title "K_i = 6.0x10^{-7}" smooth bezier, \
+10000 lt 0 lw 2 title "Set point: 10000 rpm"

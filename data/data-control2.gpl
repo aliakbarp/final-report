@@ -1,0 +1,31 @@
+set term pngcairo enhanced colour
+
+# Output type of graphic
+set term pngcairo
+set output "../img/data-control2.png"
+
+# Data which want to display
+set datafile separator "\t"
+input = "data-control2.csv"
+
+set title "Response from device to lower RPM"
+
+# x-axis
+set format x "%.0s"
+set xlabel "Time (s)"
+
+# y-axis
+set format y "%.0s"
+set ylabel "kRPM"
+
+set autoscale
+
+# size of x-y width
+set size 1.0, 1.0
+
+set key ins vert
+set key right center
+
+plot \
+input u 1:2 lt 1 lw 2 lc rgb "red" title "" smooth bezier, \
+5000 lt 0 lw 2 title "5000 rpm"

@@ -1,0 +1,35 @@
+set term pngcairo enhanced colour
+
+# Output type of graphic
+set term pngcairo
+set output "../img/data-control1.png"
+
+# Data which want to display
+set datafile separator "\t"
+input = "data-control1.csv"
+
+set title "Response from device to different step of RPM"
+
+# x-axis
+set format x "%.0s"
+set xlabel "Time (s)"
+
+# y-axis
+set format y "%.0s"
+set ylabel "kRPM"
+
+set autoscale
+
+# size of x-y width
+set size 1.0, 1.0
+
+set key ins vert
+set key right center
+
+plot \
+input u 1:2 lt 1 lw 2 lc rgb "blue" title "" smooth bezier, \
+input u 3:4 lt 1 lw 2 lc rgb "red" title "" smooth bezier, \
+input u 5:6 lt 1 lw 2 lc rgb "dark-green" title "" smooth bezier, \
+10000 lt 0 lw 2 title "", \
+11000 lt 0 lw 2 title "", \
+12000 lt 0 lw 2 title ""

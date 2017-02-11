@@ -1,0 +1,34 @@
+# Output type of graphic
+set term pngcairo enhanced colour
+
+set output "../img/time-calibration.png"
+
+# Data which want to display
+input = "data-time.csv"
+
+set title "Calibration curve of measured time with regression"
+
+# x-axis
+set xlabel "Measured time (ms)"
+
+# y-axis
+set ylabel "Reference time (ms)"
+
+# size of x-y width
+set size 1.0, 1.0
+
+# Define a function
+f(x) = a*x + b
+
+# Fit it
+fit f(x) input u 2:4 via a, b
+
+# Equation
+eq = sprintf("y = %.3f x + %.3f", a, b)
+
+set key ins vert
+set key right center
+
+plot \
+input u 2:4 title "Data" pt 7 ps 1, \
+f(x) w l lw 3 lt 0 title eq

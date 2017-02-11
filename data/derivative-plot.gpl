@@ -1,0 +1,34 @@
+set term pngcairo enhanced colour
+
+# Output type of graphic
+set term pngcairo
+set output "../img/derivative.png"
+
+# Data which want to display
+set datafile separator "\t"
+input = "dkal.csv"
+
+set title "Response to a step RPM: Kp = 6.5x10^{-3}, K_i = 6x10^{-7}, and different value of K_d"
+
+# x-axis
+set format x "%.0s"
+set xlabel "Time (s)"
+
+# y-axis
+set format y "%.0s"
+set ylabel "kRPM"
+
+set autoscale
+
+# size of x-y width
+set size 1.0, 1.0
+
+set key ins vert
+set key right center
+
+plot \
+input u 1:2 lt 1 lw 2 lc rgb "blue" title "K_d = 0.1" smooth bezier, \
+input u 3:4 lt 1 lw 2 lc rgb "dark-violet" title "K_d = 0.2" smooth bezier, \
+input u 7:8 lt 1 lw 2 lc rgb "red" title "K_d = 0.4" smooth bezier, \
+input u 11:12 lt 1 lw 2 lc rgb "dark-green" title "K_d = 0.6" smooth bezier, \
+10000 lt 0 lw 2 title "Set point: 10000 rpm"
